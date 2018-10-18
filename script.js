@@ -48,7 +48,7 @@ class SkeetOverflow {
     }
 
     doJonSkeetifiedTheReputation(reputationString, reputationLength = 12, unit = true) {
-        reputationString = jQuery.trim(reputationString.split(' ')[0])
+        reputationString = jQuery.trim((reputationString || "").split(' ')[0])
         let reputation = 0
 
         if (reputationString.indexOf(',') > -1) {

@@ -47,7 +47,7 @@ class SkeetOverflow {
         })
     }
 
-    doJonSkeetifiedTheReputation(reputationString, reputationLength = 12, unit = true) {
+    doParseReputationString(reputationString) {
         reputationString = jQuery.trim((reputationString || "").split(' ')[0])
         let reputation = 0
 
@@ -60,6 +60,12 @@ class SkeetOverflow {
         } else {
             reputation = parseFloat(reputationString.replace(/\./g, ''))
         }
+
+        return reputation
+    }
+
+    doJonSkeetifiedTheReputation(reputationString, reputationLength = 12, unit = true) {
+        const reputation = this.doParseReputationString(reputationString)
 
         const calculatedReputation = (reputation / this.jonSkeetReputation).toFixed(20)
         const jonSkeetifiedReputation = String(calculatedReputation).slice(0, reputationLength)
@@ -89,8 +95,8 @@ class SkeetOverflow {
                         localStorage.setItem(key, reputationUpdated)
                     }
     
-                    if (jonSkeetName == '') {
-                        jonSkeetName = jQuery('.profile-user--name > div').html()
+                    if (this.jonSkeetName == '') {
+                        this.jonSkeetName = jQuery('.profile-user--name > div').html()
                     }
     
                     this.jonSkeetReputation = jonSkeetReputation

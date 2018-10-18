@@ -2,6 +2,8 @@
 
 Chrome Extension for replacing all reputations on StackOverflow into Jon Skeet unit, for fun 😁.
 
+A link for anyone who doesn't know who is Jon Skeet is: https://stackoverflow.blog/2018/01/15/thanks-million-jon-skeet
+
 ## Installation
 
 1. Clone this repo.

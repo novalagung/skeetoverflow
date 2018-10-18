@@ -3,7 +3,7 @@
   "name": "Skeet Overflow",
   "short_name": "skeetoverflow",
   "description": "Chrome Extension for replacing all reputations on StackOverflow into Jon Skeet unit",
-  "version": "1.2",
+  "version": "1.0",
   "permissions": [
     "activeTab",
     "tabs",

@@ -67,6 +67,10 @@ class SkeetOverflow {
     doJonSkeetifiedTheReputation(reputationString, reputationLength = 12, unit = true) {
         const reputation = this.doParseReputationString(reputationString)
 
+        if (Math.abs(reputation - this.jonSkeetReputation) < 100000) {
+            return 'The 1'
+        }
+
         const calculatedReputation = (reputation / this.jonSkeetReputation).toFixed(20)
         const jonSkeetifiedReputation = String(calculatedReputation).slice(0, reputationLength)
 

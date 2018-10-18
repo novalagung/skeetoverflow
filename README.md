@@ -14,7 +14,7 @@ Chrome Extension for replacing all reputations on StackOverflow into Jon Skeet u
     ```
 3. Open chrome, open Extension page (or just type `chrome://extensions` directly on the url).
 4. Click **Load unpacked** button, point it to the cloned `skeetoverflow` folder.
-    ![Load Skeet Overflow Extension](https://i.imgur.com/G2aIui1.png)
+    <img src="https://i.imgur.com/G2aIui1.png" alt="Load Skeet Overflow Extension" style="height: 230px;">
 
 5. Done. Try to open any page on [Stack Overflow](https://stackoverflow.com).
 

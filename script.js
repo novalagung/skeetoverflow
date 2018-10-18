@@ -18,7 +18,7 @@ class SkeetOverflow {
             const isUserListPage = (soUri == '/users')
 
             if (soUri.indexOf(`/users/${this.jonSkeetId}`) > -1) {
-                console.log(`You are currently accessing stackoverflow profile page of living legend! ${this.jonSkeetName}`)
+                console.log(`You are currently accessing stackoverflow profile page of the living legend, the 1, the ${this.jonSkeetName}`)
             }
             
             this.doReplaceMyReputation()

@@ -10,13 +10,13 @@ A link for anyone who doesn't know who is Jon Skeet is: https://stackoverflow.bl
     ```bash
     git clone https://github.com/novalagung/skeetoverflow.git
     ```
-2. Install required dependencies through npm.
+2. Install required dependencies through npm. This is optional, because the required 3rd party file already included in this repository inside `node_modules` folder, BUT RELAX, only three files inside those folder.
     ```js
     npm install
     ```
 3. Open chrome, open Extension page (or just type `chrome://extensions` directly on the url).
 4. Click **Load unpacked** button, point it to the cloned `skeetoverflow` folder.
-    <img src="https://i.imgur.com/G2aIui1.png" alt="Load Skeet Overflow Extension" style="height: 230px;">
+    <img src="https://i.imgur.com/G2aIui1.png" alt="Load Skeet Overflow Extension" style="width: 400px;">
 
 5. Done. Try to open any page on [Stack Overflow](https://stackoverflow.com).
 

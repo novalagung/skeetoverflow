@@ -13,9 +13,13 @@ class SkeetOverflow {
             const isQuestionAllOrTaggedPage = (soUri == '/question') || (soUri.indexOf('questions/tagged/') > -1)
             const isQuestionDetailsPage = (soUri.indexOf("/questions/") == 0) && (soUri.split('/')[2] == String(parseInt(soUri.split('/')[2], 10)))
             const isPostRevisionPage = (soUri.indexOf("/posts/") == 0) && (soUri.indexOf("revisions") > -1)
-            const isUserProfilePage = (soUri.indexOf("/users/") == 0) && (soUri.split('/')[3].indexOf('profile') > -1)
+            const isUserProfilePage = (soUri.indexOf("/users/") == 0) && (soUri.split('/')[3].indexOf('profile') > -1 || soUri.indexOf('?tab') == -1)
             const isUserActivityPage = (soUri.indexOf("/users/") == 0) && (soUri.split('/')[3].indexOf('topactivity') > -1)
             const isUserListPage = (soUri == '/users')
+
+            if (soUri.indexOf(`/users/${this.jonSkeetId}`) > -1) {
+                console.log(`You are currently accessing stackoverflow profile page of living legend! ${this.jonSkeetName}`)
+            }
             
             this.doReplaceMyReputation()
     
@@ -50,11 +54,11 @@ class SkeetOverflow {
         if (reputationString.indexOf(',') > -1) {
             reputation = parseInt(reputationString.replace(/,/g, ''), 10)
         } else if (reputationString.indexOf('k') > -1) {
-            reputation = parseInt(reputationString.replace(/k/, '').replace(/\./g, ''), 10) * 1000
+            reputation = parseFloat(reputationString.replace(/k/, '')) * 1000
         } else if (reputationString.indexOf('m') > -1) {
-            reputation = parseInt(reputationString.replace(/m/, '').replace(/\./g, ''), 10) * 1000000
+            reputation = parseFloat(reputationString.replace(/m/, '')) * 1000000
         } else {
-            reputation = parseInt(reputationString.replace(/\./g, ''), 10)
+            reputation = parseFloat(reputationString.replace(/\./g, ''))
         }
 
         const calculatedReputation = (reputation / this.jonSkeetReputation).toFixed(20)

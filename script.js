@@ -67,6 +67,7 @@ class SkeetOverflow {
     doJonSkeetifiedTheReputation(reputationString, reputationLength = 12, unit = true) {
         const reputation = this.doParseReputationString(reputationString)
 
+        // since jon skeet reputation is cached and it's very possible in a second different his reputation already updated, so we use this stupid technique to make sure whether the current reputation is his'.
         if (Math.abs(reputation - this.jonSkeetReputation) < 100000) {
             return 'The 1'
         }

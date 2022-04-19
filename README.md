@@ -1,11 +1,13 @@
 # SkeetOverflow
 
-A fun browser extension for replacing all reputations on StackOverflow into percentage of Jon Skeet's reputation point.
+A fun browser extension for replacing all reputations on StackOverflow into a percentage of Jon Skeet's point.
 
 In case anyone doesn't know who John Skeet is, please check out these links:
 
 - Thanks a Million, Jon Skeet! https://stackoverflow.blog/2018/01/15/thanks-million-jon-skeet
 - Jon Skeet facts https://meta.stackexchange.com/questions/9134/jon-skeet-facts
+
+> By using this extension, you will always be reminded how small you are compared to Jon Skeet
 
 ## Installation
 

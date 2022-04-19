@@ -7,7 +7,7 @@ In case anyone doesn't know who John Skeet is, please check out these links:
 - Thanks a Million, Jon Skeet! https://stackoverflow.blog/2018/01/15/thanks-million-jon-skeet
 - Jon Skeet facts https://meta.stackexchange.com/questions/9134/jon-skeet-facts
 
-### Installation
+## Installation
 
 1. Clone the repo
 
@@ -29,7 +29,7 @@ In case anyone doesn't know who John Skeet is, please check out these links:
 
 1. Done! Now try to open any page on [Stack Overflow](https://stackoverflow.com)
 
-### Preview
+## Preview
 
 Gordon Linoff profile page https://stackoverflow.com/users/1144035/gordon-linoff
 
@@ -47,10 +47,10 @@ Top Questions page
 
 ![Skeet Overflow 4](https://raw.githubusercontent.com/novalagung/skeetoverflow/master/images/image4.png)
 
-### Maintainer
+## Maintainer
 
 Noval Agung Prayogo
 
-### License
+## License
 
 MIT License

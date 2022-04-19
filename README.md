@@ -35,19 +35,19 @@ In case anyone doesn't know who John Skeet is, please check out these links:
 
 Gordon Linoff profile page https://stackoverflow.com/users/1144035/gordon-linoff
 
-![Skeet Overflow 1](https://raw.githubusercontent.com/novalagung/skeetoverflow/master/images/image1.png)
+![Skeet Overflow 1](https://raw.githubusercontent.com/novalagung/skeetoverflow/b6ffdecc6823839177aec252b5dbe43e8a591f7f/images/image1.png)
 
 Noval Agung profile page https://stackoverflow.com/users/1467988/novalagung
 
-![Skeet Overflow 2](https://raw.githubusercontent.com/novalagung/skeetoverflow/master/images/image2.png)
+![Skeet Overflow 2](https://raw.githubusercontent.com/novalagung/skeetoverflow/d7a7511ad76add572c32cbddc4cc931cb72275e9/images/image2.png)
 
 Question details page
 
-![Skeet Overflow 3](https://raw.githubusercontent.com/novalagung/skeetoverflow/master/images/image3.png)
+![Skeet Overflow 3](https://raw.githubusercontent.com/novalagung/skeetoverflow/d7a7511ad76add572c32cbddc4cc931cb72275e9/images/image3.png)
 
 Top Questions page 
 
-![Skeet Overflow 4](https://raw.githubusercontent.com/novalagung/skeetoverflow/master/images/image4.png)
+![Skeet Overflow 4](https://raw.githubusercontent.com/novalagung/skeetoverflow/77f55af75bea7307726206f4addeeb70b462a881/images/image4.png)
 
 ## Maintainer
 

@@ -31,11 +31,19 @@ In case anyone doesn't know who John Skeet is, please check out these links:
 
 ### Preview
 
+Gordon Linoff profile page https://stackoverflow.com/users/1144035/gordon-linoff
+
 ![Skeet Overflow 1](https://raw.githubusercontent.com/novalagung/skeetoverflow/master/images/image1.png)
+
+Noval Agung profile page https://stackoverflow.com/users/1467988/novalagung
 
 ![Skeet Overflow 2](https://raw.githubusercontent.com/novalagung/skeetoverflow/master/images/image2.png)
 
+Question details page
+
 ![Skeet Overflow 3](https://raw.githubusercontent.com/novalagung/skeetoverflow/master/images/image3.png)
+
+Top Questions page 
 
 ![Skeet Overflow 4](https://raw.githubusercontent.com/novalagung/skeetoverflow/master/images/image4.png)
 

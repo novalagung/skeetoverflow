@@ -51,7 +51,7 @@ class SkeetOverflow {
         return reputation
     }
 
-    doJonSkeetifyTheReputation(reputationString, reputationLength = 6, unit = true) {
+    doJonSkeetifyTheReputation(reputationString, reputationLength = 6) {
         const reputation = this.doParseReputationString(reputationString)
 
         // since jon skeet reputation is cached and it's very possible in one second delay his reputation is updated,
@@ -60,17 +60,13 @@ class SkeetOverflow {
             return 'The 1'
         }
 
-        const scaledReputation = parseFloat(reputation / this.jonSkeetReputation)
+        const scaledReputation = parseFloat(reputation / this.jonSkeetReputation) * 100
         var jonSkeetifiedReputation = 0
         if (scaledReputation > 0) {
             jonSkeetifiedReputation = scaledReputation.toFixed(reputationLength)
         }
 
-        if (unit) {
-            return `${jonSkeetifiedReputation}% of ${this.jonSkeetName.replace(/ /g, '')}`
-        } else {
-            return jonSkeetifiedReputation
-        }
+        return `${jonSkeetifiedReputation}% of ${this.jonSkeetName.replace(/ /g, '')}`
     }
 
     doGetJonSkeetReputation() {

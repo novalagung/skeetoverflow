@@ -6,45 +6,32 @@ class SkeetOverflow {
         this.jonSkeetReputation = 0
     }
 
-    run() {
-        this.doGetJonSkeetReputation().then(() => {
-            const soUri = (document.URL.split('stackoverflow.com')[1] || '').replace(/\/$/, "")
-            const isQuestionTopPage = (soUri == '') || (soUri.indexOf('/?tab') == 0)
-            const isQuestionAllOrTaggedPage = (soUri == '/question') || (soUri.indexOf('questions/tagged/') > -1)
-            const isQuestionDetailsPage = (soUri.indexOf("/questions/") == 0) && (soUri.split('/')[2] == String(parseInt(soUri.split('/')[2], 10)))
-            const isPostRevisionPage = (soUri.indexOf("/posts/") == 0) && (soUri.indexOf("revisions") > -1)
-            const isUserProfilePage = (soUri.indexOf("/users/") == 0) && (soUri.split('/')[3].indexOf('profile') > -1 || soUri.indexOf('?tab') == -1)
-            const isUserActivityPage = (soUri.indexOf("/users/") == 0) && (soUri.split('/')[3].indexOf('topactivity') > -1)
-            const isUserListPage = (soUri == '/users')
+    async run() {
+        await this.doGetJonSkeetReputation()
 
-            if (soUri.indexOf(`/users/${this.jonSkeetId}`) > -1) {
-                console.log(`You are currently accessing stackoverflow profile page of the living legend, the 1, the ${this.jonSkeetName}`)
-            }
-            
-            this.doReplaceMyReputation()
-    
-            if (isQuestionTopPage) {
-                this.doReplaceAllReputationOnQuestionTopPage()
-            } else if (isQuestionAllOrTaggedPage) {
-                this.doReplaceAllReputationOnQuestionAllOrTaggedPage()
-            } else if (isQuestionDetailsPage) {
-                this.doReplaceAllReputationOnQuestionDetailsPage()
-    
-                jQuery('.js-show-link.comments-link').on('click', () => {
-                    setTimeout(() => {
-                        this.doReplaceAllReputationOnQuestionDetailsPage()
-                    }, 1000)
-                })
-            } else if (isPostRevisionPage) {
-                this.doReplaceAllReputationOnPostRevisionPage()
-            } else if (isUserProfilePage) {
-                this.doReplaceAllReputationOnUserProfilePage()
-            } else if (isUserActivityPage) {
-                this.doReplaceAllReputationOnUserActivityPage()
-            } else if (isUserListPage) {
-                this.doReplaceAllReputationOnUserListPage()
-            }
-        })
+        const soUri = (document.URL.split('stackoverflow.com')[1] || '').replace(/\/$/, "")
+        if (soUri.indexOf(`/users/${this.jonSkeetId}`) > -1) {
+            alert(`You are currently opening StackOverflow profile page of the one, the living legend, ${this.jonSkeetName}`)
+        }
+        
+        this.doReplaceMyReputation()
+
+        if ((soUri.indexOf("/questions/") == 0) && (soUri.split('/')[2] == String(parseInt(soUri.split('/')[2], 10)))) {
+            // console.log('question details page')
+            this.doReplaceAllReputationOnQuestionDetailsPage()
+        }else  if ((soUri == '') || (soUri.indexOf('/?tab') == 0) || soUri.indexOf('/questions') > -1 || soUri.indexOf('/unanswered') > -1) {
+            // console.log('questions page')
+            this.doReplaceAllReputationOnQuestionsListPage()
+        } else if ((soUri.indexOf("/posts/") == 0) && (soUri.indexOf("revisions") > -1)) {
+            // console.log('post revision page')
+            this.doReplaceAllReputationOnPostRevisionPage()
+        } else if ((soUri.indexOf("/users") == 0) && !(soUri.split('/users')[1])) {
+            // console.log('list users page')
+            this.doReplaceAllReputationOnListUsersPage()
+        } else if (soUri.indexOf("/users") == 0) {
+            // console.log('user page')
+            this.doReplaceAllReputationOnUserPage()
+        }
     }
 
     doParseReputationString(reputationString) {
@@ -64,19 +51,23 @@ class SkeetOverflow {
         return reputation
     }
 
-    doJonSkeetifiedTheReputation(reputationString, reputationLength = 12, unit = true) {
+    doJonSkeetifyTheReputation(reputationString, reputationLength = 6, unit = true) {
         const reputation = this.doParseReputationString(reputationString)
 
-        // since jon skeet reputation is cached and it's very possible in a second different his reputation already updated, so we use this stupid technique to make sure whether the current reputation is his'.
+        // since jon skeet reputation is cached and it's very possible in one second delay his reputation is updated,
+        // so we use this stupid technique to make sure the current reputation matches with his'.
         if (Math.abs(reputation - this.jonSkeetReputation) < 100000) {
             return 'The 1'
         }
 
-        const calculatedReputation = (reputation / this.jonSkeetReputation).toFixed(20)
-        const jonSkeetifiedReputation = String(calculatedReputation).slice(0, reputationLength)
+        const scaledReputation = parseFloat(reputation / this.jonSkeetReputation)
+        var jonSkeetifiedReputation = 0
+        if (scaledReputation > 0) {
+            jonSkeetifiedReputation = scaledReputation.toFixed(reputationLength)
+        }
 
         if (unit) {
-            return `${jonSkeetifiedReputation} ${this.jonSkeetName}`
+            return `${jonSkeetifiedReputation}% of ${this.jonSkeetName.replace(/ /g, '')}`
         } else {
             return jonSkeetifiedReputation
         }
@@ -93,15 +84,11 @@ class SkeetOverflow {
                 const url = `https://stackoverflow.com/users/${this.jonSkeetId}/jon-skeet`
                 jQuery.get(url).then((res) => {
                     const reputationUpdated = this.doParseReputationString(jQuery(res)
-                        .find('[title="reputation"] .fs-title')
+                        .find('#stats > div.s-card.fc-light.bar-md > div > div:nth-child(1) > div')
                         .html())
                     if (reputationUpdated) {
                         jonSkeetReputation = reputationUpdated
                         localStorage.setItem(key, reputationUpdated)
-                    }
-    
-                    if (this.jonSkeetName == '') {
-                        this.jonSkeetName = jQuery('.profile-user--name > div').html()
                     }
     
                     this.jonSkeetReputation = jonSkeetReputation
@@ -115,117 +102,62 @@ class SkeetOverflow {
     }
 
     doReplaceMyReputation() {
-        const target = jQuery('.my-profile .js-header-rep:not(.reputation-modified)')
-        const jonSkeetifiedReputation = this.doJonSkeetifiedTheReputation(target.html())
-
-        target.addClass('reputation-modified')
-        target.html(jonSkeetifiedReputation)
-    }
-
-    doReplaceAllReputationOnQuestionTopPage() {
-        jQuery('.reputation-score:not(.reputation-modified)').each((i, e) => {
-            const each = jQuery(e)
-            const jonSkeetifiedReputation = this.doJonSkeetifiedTheReputation(each.html())
-
-            each.addClass('reputation-modified')
-            each.html(jonSkeetifiedReputation)
-        })
-    }
-
-    doReplaceAllReputationOnQuestionAllOrTaggedPage() {
-        jQuery('.reputation-score:not(.reputation-modified)').each((i, e) => {
-            const each = jQuery(e)
-            const jonSkeetifiedReputation = this.doJonSkeetifiedTheReputation(each.html())
-            console.log(each.html(), jonSkeetifiedReputation)
-
-            each.addClass('reputation-modified')
-            each.html(jonSkeetifiedReputation)
-            each.css({
-                'display': 'block',
-                'margin-top': '2px'
-            })
-            each.next().css('margin-left', '-2px')
-        })
+        try {
+            const target = jQuery('.s-user-card--rep.js-header-rep')
+            const value = this.doJonSkeetifyTheReputation(target.attr('title').split(': ')[1] || '')
+            target.addClass('reputation-modified')
+            target.html(value)
+        } catch (e) {
+            console.log('you are not logged in')
+        }
     }
 
     doReplaceAllReputationOnQuestionDetailsPage() {
-        jQuery('.post-signature .-flair .reputation-score:not(.reputation-modified)').each((i, e) => {
+        jQuery('.reputation-score:not(.reputation-modified)').each((i, e) => {
             const each = jQuery(e)
-            const jonSkeetifiedReputation = this.doJonSkeetifiedTheReputation(each.html())
-
+            const value = this.doJonSkeetifyTheReputation(each.html())
             each.addClass('reputation-modified')
-            each.html(jonSkeetifiedReputation)
-            each.css({
-                'display': 'block',
-                'margin-top': '2px'
-            })
-            each.next().css('margin-left', '-2px')
+            each.html(value)
         })
+    }
 
-        jQuery('a.comment-user[title*=reputation]:not(.reputation-modified)').each((i, e) => {
+    doReplaceAllReputationOnQuestionsListPage() {
+        jQuery('.s-user-card--rep span:not(.reputation-modified)').each((i, e) => {
             const each = jQuery(e)
-            const jonSkeetifiedReputation = this.doJonSkeetifiedTheReputation(each.attr('title'))
-            
+            const value = this.doJonSkeetifyTheReputation(each.html())
             each.addClass('reputation-modified')
-            each.attr('title', `${jonSkeetifiedReputation} reputation`)
+            each.html(value)
         })
     }
 
     doReplaceAllReputationOnPostRevisionPage() {
-        jQuery('.user-info .user-details .reputation-score:not(.reputation-modified)').each((i, e) => {
+        jQuery('.s-user-card--rep:not(.reputation-modified)').each((i, e) => {
             const each = jQuery(e)
-            const jonSkeetifiedReputation = this.doJonSkeetifiedTheReputation(each.html())
-
+            const value = this.doJonSkeetifyTheReputation(each.html())
             each.addClass('reputation-modified')
-            each.html(jonSkeetifiedReputation)
-            each.css({
-                'display': 'block',
-                'margin-top': '2px'
-            })
-            each.next().css('margin-left', '-2px')
+            each.html(value)
         })
     }
 
-    doReplaceAllReputationOnUserProfilePage() {
-        const target = jQuery('.user-card .fs-title:not(.reputation-modified)')
-        const jonSkeetifiedReputation = this.doJonSkeetifiedTheReputation(target.html())
-        
+    doReplaceAllReputationOnListUsersPage() {
+        const target = jQuery('.reputation-score:not(.reputation-modified)')
+        const value = this.doJonSkeetifyTheReputation(target.html())
         target.addClass('reputation-modified')
-        target.html(jonSkeetifiedReputation)
-        target.css('cssText', 'font-size: 1.1em !important; font-weight: bold')
-        target.parent().css('display', 'block')
-
-        jQuery('.profile-communities--item .fc-light:not(.reputation-modified)').each((i, e) => {
-            const each = jQuery(e)
-            const reputationString = each.html()
-            const jonSkeetifiedReputationWithoutUnit = this.doJonSkeetifiedTheReputation(reputationString, 9, false)
-
-            each.addClass('reputation-modified')
-            each.html(jonSkeetifiedReputationWithoutUnit)
-            
-            const target2nd = each.next().find('strong:not(.reputation-modified)')
-            
-            target2nd.addClass('reputation-modified')
-            target2nd.html(jonSkeetifiedReputationWithoutUnit)
-        })
-
-        jQuery('.profile-top-tags .grid--cell .grid .jc-end').each((i, e) => {
-            jQuery(e).find('> div > div:eq(0) > span:eq(1):not(.reputation-modified)').each((i, e) => {
-                const each = jQuery(e)
-                const jonSkeetifiedReputation = this.doJonSkeetifiedTheReputation(each.html(), 12, false)
-
-                each.addClass('reputation-modified')
-                each.html(jonSkeetifiedReputation)
-            })
-        })
+        target.html(value)
     }
 
-    doReplaceAllReputationOnUserActivityPage() {
-
-    }
-
-    doReplaceAllReputationOnUserListPage() {
-
+    doReplaceAllReputationOnUserPage() {
+        // user activity page
+        const targetActivity = jQuery('.fs-headline1:not(.reputation-modified)')
+        const value1 = this.doJonSkeetifyTheReputation(targetActivity.html())
+        targetActivity.addClass('reputation-modified')
+        targetActivity.html(value1)
+        
+        // user profile page
+        const target = jQuery('#stats > div.s-card.fc-light.bar-md > div > div:nth-child(1) > div:not(.reputation-modified)')
+        const value2 = this.doJonSkeetifyTheReputation(target.html())
+        target.addClass('reputation-modified')
+        target.html(value2)
     }
 }
 

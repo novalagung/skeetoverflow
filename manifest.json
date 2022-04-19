@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Skeet Overflow",
   "short_name": "skeetoverflow",
-  "description": "Chrome Extension for replacing all reputations on StackOverflow into Jon Skeet unit",
+  "description": "A fun browser extension for replacing all reputations on StackOverflow into percentage of Jon Skeet's reputation point",
   "version": "1.0",
   "permissions": [
     "activeTab",

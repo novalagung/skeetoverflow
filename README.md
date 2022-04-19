@@ -7,7 +7,7 @@ In case anyone doesn't know who John Skeet is, please check out these links:
 - Thanks a Million, Jon Skeet! https://stackoverflow.blog/2018/01/15/thanks-million-jon-skeet
 - Jon Skeet facts https://meta.stackexchange.com/questions/9134/jon-skeet-facts
 
-> By using this extension, you are going to be constantly reminded about how small are you compared to Jon Skeet
+> By using this extension, you will always be reminded how small you are compared to Jon Skeet
 
 ## Installation
 

@@ -57,7 +57,7 @@ class SkeetOverflow {
         // since jon skeet reputation is cached and it's very possible in one second delay his reputation is updated,
         // so we use this stupid technique to make sure the current reputation matches with his'.
         if (Math.abs(reputation - this.jonSkeetReputation) < 100000) {
-            return 'The 1'
+            return 'The 100%'
         }
 
         const scaledReputation = parseFloat(reputation / this.jonSkeetReputation) * 100

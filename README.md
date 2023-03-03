@@ -2,6 +2,8 @@
 
 A fun browser extension for replacing all reputations on StackOverflow into a percentage of Jon Skeet's point.
 
+<a href="https://www.producthunt.com/products/skeetoverflow-browser-extension?utm_source=badge-follow&utm_medium=badge&utm_souce=badge-skeetoverflow&#0045;browser&#0045;extension" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/follow.svg?product_id=477780&theme=light" alt="SkeetOverflow&#0032;Browser&#0032;Extension - Convert&#0032;all&#0032;reputations&#0032;into&#0032;percentage&#0032;of&#0032;Jon&#0032;Skeet&#0039;s&#0032;rep | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+
 In case anyone doesn't know who Jon Skeet is, please check out these links:
 
 - Thanks a Million, Jon Skeet! https://stackoverflow.blog/2018/01/15/thanks-million-jon-skeet
